@@ -3,13 +3,11 @@ const mongoose = require('mongoose');
 
 const AnalysisReportSchema = new mongoose.Schema({
     userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true,
     },
     analystId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Analyst',
+        type: String,
         required: true,
     },
     outputTime: {
@@ -24,20 +22,13 @@ const AnalysisReportSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    notableBiomass: [{
-        type: String,
-    }],
-    fieldBiomassAbundance: [{
-        fieldId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Field',
-            required: true,
+    notableBiomass: [String],
+    fieldBiomassAbundance: [
+        {
+            fieldId: { type: String, required: true },
+            abundance: { type: Number, required: true },
         },
-        abundance: {
-            type: Number,
-            required: true,
-        }
-    }],
+    ],
     cloudReportLocation: {
         type: String,
         required: true,
@@ -45,7 +36,15 @@ const AnalysisReportSchema = new mongoose.Schema({
     summary: {
         type: String,
         required: true,
-    }
-}, { timestamps: true });
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
+});
 
 module.exports = mongoose.model('AnalysisReport', AnalysisReportSchema);

@@ -4,8 +4,8 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type AnalysisReport {
     id: ID!
-    userId: ID!
-    analystId: ID!
+    userId: String!
+    analystId: String!
     outputTime: String!
     detectionTimeRange: DetectionTimeRange!
     abundanceThreshold: Float!
@@ -23,7 +23,7 @@ const typeDefs = gql`
   }
 
   type FieldBiomassAbundance {
-    fieldId: ID!
+    fieldId: String!
     abundance: Float!
   }
 
@@ -34,8 +34,8 @@ const typeDefs = gql`
 
   type Mutation {
     addAnalysisReport(
-      userId: ID!,
-      analystId: ID!,
+      userId: String!,
+      analystId: String!,
       outputTime: String!,
       detectionTimeRange: DetectionTimeRangeInput!,
       abundanceThreshold: Float!,
@@ -52,7 +52,7 @@ const typeDefs = gql`
   }
 
   input FieldBiomassAbundanceInput {
-    fieldId: ID!
+    fieldId: String!
     abundance: Float!
   }
 `;
