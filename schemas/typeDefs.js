@@ -27,9 +27,33 @@ const typeDefs = gql`
     abundance: Float!
   }
 
+  type Field {
+    id: ID!
+    field: String!
+    userId: String!
+    updateTime: String!
+    soilType: String!
+    geoLocation: GeoLocation!
+    cityOrTown: String!
+    crops: [String]
+  }
+
+  type GeoLocation {
+    topLeftX: Float!
+    topLeftY: Float!
+    BottomRightX: Float!
+    BottomRightY: Float!
+  }
+
   type Query {
     getAnalysisReports: [AnalysisReport]
     getAnalysisReport(id: ID!): AnalysisReport
+    getAnalysisReportsByUserId(userId: String!): [AnalysisReport]
+    getAnalysisReportsByAnalystId(analystId: String!): [AnalysisReport]
+    
+    getFields: [Field]
+    getField(id: ID!): Field
+    getFieldsByUserId(userId: String!): [Field]
   }
 
   type Mutation {
@@ -44,6 +68,16 @@ const typeDefs = gql`
       cloudReportLocation: String!,
       summary: String!
     ): AnalysisReport
+
+    addField(
+      field: String!,
+      userId: String!,
+      updateTime: String!,
+      soilType: String!,
+      geoLocation: GeoLocationInput!,
+      cityOrTown: String!,
+      crops: [String]
+    ): Field
   }
 
   input DetectionTimeRangeInput {
@@ -54,6 +88,13 @@ const typeDefs = gql`
   input FieldBiomassAbundanceInput {
     fieldId: String!
     abundance: Float!
+  }
+
+  input GeoLocationInput {
+    topLeftX: Float!
+    topLeftY: Float!
+    BottomRightX: Float!
+    BottomRightY: Float!
   }
 `;
 

@@ -5,10 +5,12 @@ const connectDB = require('../config/db');
 const typeDefs = require('../schemas/typeDefs');
 const resolvers = require('../schemas/resolvers');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 dotenv.config();
 
 const app = express();
+app.use(bodyParser.json());
 
 // Connect to MongoDB
 connectDB()
@@ -31,7 +33,6 @@ const startServer = async () => {
         console.log('Middleware applied.');
 
         // Static files and other routes
-        app.use(express.static(path.join(__dirname, 'public')));
         app.use(express.static(path.join(__dirname, 'public')));
 
         // Start listening on specified port
