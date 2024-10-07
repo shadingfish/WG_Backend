@@ -1,10 +1,10 @@
-// /src/resolvers/resolvers.js
+// /src/index/index.js
 const fileResolvers = require('./fileResolvers');
 const analysisReportResolvers = require('./analysisReportResolvers'); // 如果有其他模块 resolver，可以引入
 const fieldResolvers = require('./fieldResolvers'); // 引入 Field 相关的 resolver
 
-// 汇总所有模块的 resolvers
-const resolvers = {
+
+const index = {
     Query: {
         ...fileResolvers.Query,
         ...analysisReportResolvers.Query,
@@ -17,4 +17,4 @@ const resolvers = {
     },
 };
 
-module.exports = resolvers;
+module.exports = index;

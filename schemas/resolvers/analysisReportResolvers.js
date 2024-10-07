@@ -1,5 +1,5 @@
-// /src/schemas/resolvers.js
-const AnalysisReport = require('../models/AnalysisReport');
+// /src/schemas/index.js
+const AnalysisReport = require('../../models/AnalysisReport');
 
 const analysisReportResolvers = {
     Query: {

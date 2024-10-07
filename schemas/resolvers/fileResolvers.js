@@ -1,6 +1,6 @@
 // /src/resolvers/fileResolvers.js
 const { GraphQLUpload } = require('graphql-upload');
-const { gridFSBucket, gfs, conn } = require('../models/gridFS');
+const { gridFSBucket, gfs, conn } = require('../../models/gridFS');
 const { ObjectId } = require('mongodb');
 const fs = require('fs');
 const path = require('path');

@@ -6,6 +6,7 @@
     "start": "node ./routes/index.js"
   },
   "dependencies": {
+    "@graphql-tools/merge": "^9.0.7",
     "apollo-server-express": "^3.13.0",
     "body-parser": "^1.20.3",
     "cookie-parser": "~1.4.4",

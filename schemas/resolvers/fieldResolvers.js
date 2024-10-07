@@ -1,4 +1,4 @@
-const Field  = require('../models/Field');
+const Field  = require('../../models/Field');
 
 const fieldResolvers = {
     Query: {
