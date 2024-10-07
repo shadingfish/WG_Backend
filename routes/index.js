@@ -1,9 +1,10 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const dotenv = require('dotenv');
+const { graphqlUploadExpress } = require('graphql-upload'); // 引入 graphql-upload 中间件
 const connectDB = require('../config/db');
 const typeDefs = require('../schemas/typeDefs');
-const resolvers = require('../schemas/resolvers');
+const resolvers = require('../resolvers/resolvers');
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -17,10 +18,14 @@ connectDB()
     .then(() => console.log('Database connected successfully'))
     .catch(err => console.error('Database connection error:', err));
 
+app.use(graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 })); // 设置最大文件大小和最大上传文件数量
+
 // Initialize Apollo Server
 const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req }) => ({ req }), // 为文件上传操作添加上下文（context）
+    uploads: false, // 禁用 Apollo Server 的内置上传功能，以使用 graphql-upload
 });
 
 const startServer = async () => {

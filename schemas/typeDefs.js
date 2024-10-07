@@ -26,7 +26,7 @@ const typeDefs = gql`
     fieldId: String!
     abundance: Float!
   }
-
+  
   type Field {
     id: ID!
     field: String!
@@ -95,6 +95,49 @@ const typeDefs = gql`
     topLeftY: Float!
     BottomRightX: Float!
     BottomRightY: Float!
+  }
+  
+  
+  
+  # 文件类型定义
+  type File {
+    id: ID!
+    filename: String!
+    mimetype: String!
+    encoding: String!
+    url: String!
+    createdAt: String!
+    updatedAt: String!
+  }
+
+  # 文件上传时的输入类型
+  input FileUploadInput {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+    content: String! # base64 编码的文件内容
+  }
+
+  # 文件更新时的输入类型
+  input FileUpdateInput {
+    id: ID!
+    filename: String
+    mimetype: String
+    encoding: String
+    content: String # base64 编码的文件内容
+  }
+
+  # 定义 Mutation 用于文件操作
+  extend type Mutation {
+    uploadFile(file: FileUploadInput!): File!
+    updateFile(file: FileUpdateInput!): File!
+    deleteFile(id: ID!): String!
+  }
+
+  # 定义 Query 用于查询文件
+  extend type Query {
+    getFile(id: ID!): File
+    getFiles: [File]
   }
 `;
 
